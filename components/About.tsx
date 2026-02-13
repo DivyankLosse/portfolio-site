@@ -40,7 +40,7 @@ export default function About() {
                     <div className="md:w-1/3">
                         <motion.h2
                             variants={itemVariants}
-                            className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-8 sticky top-32"
+                            className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-8 "
                         >
                             ( About Me )
                         </motion.h2>
