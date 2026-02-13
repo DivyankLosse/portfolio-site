@@ -1,26 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --font-inter: 'Inter', sans-serif;
+  --font-grape: var(--font-grape-nuts);
+  --font-hammer: var(--font-hammersmith-one);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon-blue: #0033ff;
+  --neon-glow: 0 0 20px rgba(0, 51, 255, 0.5);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  overflow-x: hidden;
 }
