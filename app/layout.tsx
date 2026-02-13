@@ -3,6 +3,7 @@ import { Inter, Grape_Nuts, Hammersmith_One } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -24,7 +25,10 @@ export default function RootLayout({
       <body className={`${inter.variable} ${grapeNuts.variable} ${hammersmith.variable} font-sans antialiased cursor-none bg-black text-white`}>
         <Cursor />
         <Header />
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

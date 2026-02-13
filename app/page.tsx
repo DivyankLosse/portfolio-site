@@ -14,14 +14,7 @@ export default function Home() {
         <Projects />
       </div>
 
-      <footer className="py-24 bg-black text-white/20 text-center relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-          <span className="text-[20vw] font-bold tracking-tighter">DIVYANK</span>
-        </div>
-        <p className="relative z-10 text-sm tracking-widest">
-          © {new Date().getFullYear()} DIVYANK KHEWALE.
-        </p>
-      </footer>
+
     </main>
   );
 }

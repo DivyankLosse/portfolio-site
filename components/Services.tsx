@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 
 const services = [
-    { id: "01", title: "Web Development", description: "High-performance websites built with Next.js and WebGL." },
-    { id: "02", title: "AI Integration", description: "Custom AI solutions using Python and LLMs." },
-    { id: "03", title: "Motion Design", description: "Interactive animations that bring interfaces to life." },
-    { id: "04", title: "Brand Identity", description: "Visual systems that stand out in the digital noise." },
+    { id: "01", title: "Data Analysis", description: "Uncover insights and trends from your data." },
+    { id: "02", title: "Machine Learning", description: "Build predictive models and intelligent systems." },
+    { id: "03", title: "Deep Learning", description: "Advanced neural networks for complex problems." },
+    { id: "04", title: "AI Prototyping", description: "Rapidly test and validate AI concepts." },
+    { id: "05", title: "Predictive Modeling", description: "Forecast future outcomes with precision." },
+    { id: "06", title: "Dashboards & Reporting", description: "Visualizations that tell a clear data story." },
 ];
 
 export default function Services() {
