@@ -8,26 +8,26 @@ import { useLenis } from "@/components/SmoothScroll";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
-    const [isHovered, setIsHovered] = useState(false);
+    // const [isHovered, setIsHovered] = useState(false);
     const { lenis } = useLenis();
     const pathname = usePathname();
 
     // ... useEffect
 
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith("#")) {
-            e.preventDefault();
-            if (pathname === "/") {
-                if (lenis) {
-                    lenis.scrollTo(href);
+    // const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    //     if (href.startsWith("#")) {
+    //         e.preventDefault();
+    //         if (pathname === "/") {
+    //             if (lenis) {
+    //                 lenis.scrollTo(href);
                     // Manually update URL to reflect the section
-                    history.pushState(null, "", href);
-                }
-            } else {
-                window.location.href = "/" + href;
-            }
-        }
-    };
+    //                 history.pushState(null, "", href);
+    //             }
+    //         } else {
+    //             window.location.href = "/" + href;
+    //         }
+    //     }
+    // };
 
     return (
         <motion.header
@@ -56,8 +56,8 @@ export default function Header() {
             </Link>
 
             <nav className="hidden md:flex items-center gap-8 text-xs md:text-sm font-medium tracking-widest uppercase">
-                <a href="#about" onClick={(e) => handleNavClick(e, "#about")} className="hover:text-blue-500 transition-colors">About</a>
-                <a href="#work" onClick={(e) => handleNavClick(e, "#work")} className="hover:text-blue-500 transition-colors">Work</a>
+                <a href="#about" className="hover:text-blue-500 transition-colors">About</a>
+                <a href="#work" className="hover:text-blue-500 transition-colors">Work</a>
                 <a href="mailto:hello@divyank.com" className="hover:text-blue-500 transition-colors">Contact</a>
             </nav>
 
