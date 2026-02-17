@@ -1,10 +1,43 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import Link from "next/link";
 
 export default function ContactForm() {
     const [focusedField, setFocusedField] = useState<string | null>(null);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        company: "",
+        services: "",
+        message: ""
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [id]: value
+        }));
+    };
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+
+        const subject = `New Inquiry from ${formData.name}`;
+        const body = `Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company}
+Services: ${formData.services}
+
+Message:
+${formData.message}`;
+
+        const mailtoLink = `mailto:chinmaykhewale2005@gamil.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+    };
 
     const inputClasses = "w-full bg-transparent border-b border-white/20 py-4 text-white placeholder-white/40 focus:outline-none transition-colors duration-300";
     const labelClasses = "block text-xs uppercase tracking-widest text-gray-400 mb-2";
@@ -39,7 +72,7 @@ export default function ContactForm() {
             initial="hidden"
             animate="visible"
             className="w-full max-w-4xl mx-auto space-y-12"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
         >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <motion.div variants={itemVariants} className="relative group">
@@ -47,6 +80,8 @@ export default function ContactForm() {
                     <input
                         type="text"
                         id="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="John Doe *"
                         className={inputClasses}
                         onFocus={() => setFocusedField('name')}
@@ -65,6 +100,8 @@ export default function ContactForm() {
                     <input
                         type="email"
                         id="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="john@doe.com *"
                         className={inputClasses}
                         onFocus={() => setFocusedField('email')}
@@ -85,6 +122,8 @@ export default function ContactForm() {
                     <input
                         type="text"
                         id="company"
+                        value={formData.company}
+                        onChange={handleChange}
                         placeholder="John & Doe ®"
                         className={inputClasses}
                         onFocus={() => setFocusedField('company')}
@@ -103,6 +142,8 @@ export default function ContactForm() {
                     <input
                         type="text"
                         id="services"
+                        value={formData.services}
+                        onChange={handleChange}
                         placeholder="Web Design, Development..."
                         className={inputClasses}
                         onFocus={() => setFocusedField('services')}
@@ -122,6 +163,8 @@ export default function ContactForm() {
                 <textarea
                     id="message"
                     rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Hello, I'm looking to..."
                     className={`${inputClasses} resize-none`}
                     onFocus={() => setFocusedField('message')}
@@ -135,7 +178,7 @@ export default function ContactForm() {
                 />
             </motion.div>
 
-            <motion.div variants={itemVariants} className="pt-8">
+            <motion.div variants={itemVariants} className="pt-8 flex flex-col md:flex-row gap-6 items-center">
                 <button
                     type="submit"
                     className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full"
@@ -146,6 +189,13 @@ export default function ContactForm() {
                     <span className="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease">Send Inquiry</span>
                     <span className="relative invisible">Send Inquiry</span>
                 </button>
+
+                <Link
+                    href="/"
+                    className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full hover:bg-white/10"
+                >
+                    <span className="relative">Back to Home</span>
+                </Link>
             </motion.div>
         </motion.form>
     );

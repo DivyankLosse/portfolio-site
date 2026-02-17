@@ -41,14 +41,14 @@ export default function Projects() {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
     return (
-        <section className="min-h-screen bg-black text-white py-32 px-6 md:px-12 relative z-20" id="work">
+        <section className="min-h-screen bg-black text-white py-20 md:py-32 px-6 md:px-12 relative z-20" id="work">
             <div className="max-w-7xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-16"
+                    className="text-xs md:text-sm font-bold tracking-widest uppercase text-blue-600 mb-12 md:mb-16"
                 >
                     ( Selected Works )
                 </motion.h2>
@@ -63,33 +63,34 @@ export default function Projects() {
                             viewport={{ once: true }}
                             onMouseEnter={() => setHoveredProject(project.id)}
                             onMouseLeave={() => setHoveredProject(null)}
-                            className="group border-t border-white/20 py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer transition-colors duration-500 hover:border-blue-600 relative overflow-hidden"
+                            className="group border-t border-white/20 py-8 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer transition-colors duration-500 hover:border-blue-600 relative overflow-hidden"
                         >
-                            <div className="z-10 transition-transform duration-500 group-hover:translate-x-4">
-                                <h3 className="text-4xl md:text-6xl font-bold tracking-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50">
+                            <div className="z-10 transition-transform duration-500 md:group-hover:translate-x-4">
+                                <h3 className="text-3xl md:text-6xl font-bold tracking-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50">
                                     {project.title}
                                 </h3>
-                                <div className="flex items-center gap-4 text-white/50 text-sm font-mono uppercase tracking-widest group-hover:text-blue-500 transition-colors">
+                                <div className="flex items-center gap-4 text-white/50 text-xs md:text-sm font-mono uppercase tracking-widest group-hover:text-blue-500 transition-colors">
                                     <span>{project.category}</span>
                                 </div>
                             </div>
 
-                            <div className="z-10 mt-6 md:mt-0 flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-4 group-hover:translate-x-0">
-                                <span className="text-sm font-light hidden md:block text-white/80 max-w-xs text-right">
+                            <div className="z-10 mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-4 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:-translate-x-4 md:group-hover:translate-x-0">
+                                <span className="text-sm font-light text-white/70 md:text-white/80 max-w-xs md:text-right">
                                     {project.description}
                                 </span>
-                                <div className="p-3 rounded-full border border-white/20 bg-white/5 group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors">
-                                    <ArrowUpRight className="w-5 h-5 text-white" />
+                                <div className="p-2.5 md:p-3 rounded-full border border-white/20 bg-white/5 md:group-hover:bg-blue-600 md:group-hover:border-blue-600 transition-colors">
+                                    <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
                                 </div>
                             </div>
 
                             {/* Background Glow on Hover */}
-                            <div className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl p-4" />
+                            <div className="absolute inset-0 bg-blue-900/10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 blur-xl p-4" />
                         </motion.div>
                     ))}
                     <div className="border-t border-white/20" />
                 </div>
             </div>
         </section>
+
     );
 }
