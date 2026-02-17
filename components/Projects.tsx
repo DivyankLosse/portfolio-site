@@ -16,20 +16,27 @@ interface Project {
 const projects: Project[] = [
     {
         id: "01",
+        title: "AgriLO",
+        category: "AI & IoT",
+        description: "Smart Farming Assistant with AI-powered Soil Analysis, Disease Detection, and Expert Chat.",
+        link: "https://github.com/DivyankLosse/AgriLO",
+    },
+    {
+        id: "02",
         title: "AI Image Generator",
         category: "Machine Learning",
         description: "Latent diffusion model interface built with Next.js and Python backend.",
         link: "#",
     },
     {
-        id: "02",
+        id: "03",
         title: "Crypto Dashboard",
         category: "FinTech",
         description: "Real-time cryptocurrency analytics platform with D3.js visualizations.",
         link: "#",
     },
     {
-        id: "03",
+        id: "04",
         title: "E-Commerce Headless",
         category: "Web Development",
         description: "High-performance headless Shopify storefront using Hydrogen.",
