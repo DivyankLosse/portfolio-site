@@ -62,37 +62,44 @@ export default function Projects() {
 
                 <div className="flex flex-col">
                     {projects.map((project, index) => (
-                        <motion.div
+                        <Link
                             key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            onMouseEnter={() => setHoveredProject(project.id)}
-                            onMouseLeave={() => setHoveredProject(null)}
-                            className="group border-t border-white/20 py-8 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer transition-colors duration-500 hover:border-blue-600 relative overflow-hidden"
+                            href={project.link}
+                            target={project.link.startsWith("http") ? "_blank" : undefined}
+                            rel={project.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                            className="block"
                         >
-                            <div className="z-10 transition-transform duration-500 md:group-hover:translate-x-4">
-                                <h3 className="text-3xl md:text-6xl font-bold tracking-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50">
-                                    {project.title}
-                                </h3>
-                                <div className="flex items-center gap-4 text-white/50 text-xs md:text-sm font-mono uppercase tracking-widest group-hover:text-blue-500 transition-colors">
-                                    <span>{project.category}</span>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                onMouseEnter={() => setHoveredProject(project.id)}
+                                onMouseLeave={() => setHoveredProject(null)}
+                                className="group border-t border-white/20 py-8 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer transition-colors duration-500 hover:border-blue-600 relative overflow-hidden"
+                            >
+                                <div className="z-10 transition-transform duration-500 md:group-hover:translate-x-4">
+                                    <h3 className="text-3xl md:text-6xl font-bold tracking-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50">
+                                        {project.title}
+                                    </h3>
+                                    <div className="flex items-center gap-4 text-white/50 text-xs md:text-sm font-mono uppercase tracking-widest group-hover:text-blue-500 transition-colors">
+                                        <span>{project.category}</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="z-10 mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-4 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:-translate-x-4 md:group-hover:translate-x-0">
-                                <span className="text-sm font-light text-white/70 md:text-white/80 max-w-xs md:text-right">
-                                    {project.description}
-                                </span>
-                                <div className="p-2.5 md:p-3 rounded-full border border-white/20 bg-white/5 md:group-hover:bg-blue-600 md:group-hover:border-blue-600 transition-colors">
-                                    <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                                <div className="z-10 mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-4 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:-translate-x-4 md:group-hover:translate-x-0">
+                                    <span className="text-sm font-light text-white/70 md:text-white/80 max-w-xs md:text-right">
+                                        {project.description}
+                                    </span>
+                                    <div className="p-2.5 md:p-3 rounded-full border border-white/20 bg-white/5 md:group-hover:bg-blue-600 md:group-hover:border-blue-600 transition-colors">
+                                        <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Background Glow on Hover */}
-                            <div className="absolute inset-0 bg-blue-900/10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 blur-xl p-4" />
-                        </motion.div>
+                                {/* Background Glow on Hover */}
+                                <div className="absolute inset-0 bg-blue-900/10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 blur-xl p-4" />
+                            </motion.div>
+                        </Link>
                     ))}
                     <div className="border-t border-white/20" />
                 </div>
