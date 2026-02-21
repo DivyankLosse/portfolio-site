@@ -13,6 +13,9 @@ const hammersmith = Hammersmith_One({ subsets: ["latin"], weight: "400", variabl
 export const metadata: Metadata = {
   title: "Divyank Khewale | AI Engineer",
   description: "A high-end, cinematic, dark-themed personal portfolio.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
