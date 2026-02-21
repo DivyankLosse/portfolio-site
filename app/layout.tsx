@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Divyank Khewale | AI Engineer",
   description: "A high-end, cinematic, dark-themed personal portfolio.",
   icons: {
-    icon: "/logo.svg",
+    icon: "/logo.png",
   },
 };
 
