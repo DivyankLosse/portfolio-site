@@ -4,19 +4,24 @@ import { motion } from "framer-motion";
 
 const capabilities = [
     {
-        category: "Machine Learning & AI",
-        description: "Training predictive models and working with generative AI. Focused on evaluating models and processing data effectively.",
-        tools: ["Predictive Modeling", "Generative AI", "Model Training", "Time-Series"]
+        category: "AI & Machine Learning",
+        description: "Experience across Machine Learning, Deep Learning, Computer Vision, and NLP. Currently diving deeper into applied LLMs and RAG architectures.",
+        tools: ["Deep Learning", "Computer Vision", "NLP", "LLMs (Learning to apply)"]
+    },
+    {
+        category: "Data Science & Analytics",
+        description: "Making sense of messy datasets. Handling pipelines, extracting insights, and building clear visualizations.",
+        tools: ["Data Science", "Data Analytics", "Data Visualization", "Time-Series"]
     },
     {
         category: "Tools & Libraries",
-        description: "The core stack I use to experiment with datasets, build pipelines, and construct models.",
+        description: "The core stack I use to experiment with datasets, train models, and build out complete projects.",
         tools: ["Python", "TensorFlow", "PyTorch", "Pandas", "Scikit-learn"]
     },
     {
         category: "Supporting Skills",
-        description: "Everything else needed to actually get a model working in a project instead of just sitting in a notebook.",
-        tools: ["Data Analysis", "FastAPI", "MQTT", "React"]
+        description: "Everything else needed to actually ship a project instead of just leaving it in a Jupyter notebook.",
+        tools: ["FastAPI", "React", "MQTT", "APIs"]
     }
 ];
 
