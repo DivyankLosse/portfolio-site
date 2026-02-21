@@ -99,8 +99,8 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                 style={{ opacity: opacity2, y: y2 }}
                 className="absolute w-full px-12 md:px-24 flex justify-start"
             >
-                <h2 className="text-5xl md:text-7xl font-semibold leading-tight max-w-2xl text-left">
-                    I build digital experiences.
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] max-w-3xl text-left tracking-tight">
+                    I like building things <br className="hidden md:block" /> and figuring out how they work.
                 </h2>
             </motion.div>
 
@@ -109,8 +109,8 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                 style={{ opacity: opacity3, y: y3 }}
                 className="absolute w-full px-12 md:px-24 flex justify-end"
             >
-                <h2 className="text-5xl md:text-7xl font-semibold leading-tight max-w-2xl text-right">
-                    Bridging design <br /> and engineering.
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.2] max-w-3xl text-right tracking-tight text-white/90">
+                    Bridging curiosity <br /> with code.
                 </h2>
             </motion.div>
         </div>

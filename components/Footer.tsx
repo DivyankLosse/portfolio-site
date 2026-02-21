@@ -30,12 +30,12 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="w-full py-12 px-4 md:px-8 border-t border-white/10 bg-black text-white z-40 relative">
+        <footer className="w-full py-[var(--spacing-fluid-gap)] px-[var(--spacing-section-px)] border-t border-white/10 bg-black text-white z-40 relative">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
 
                 {/* Brand / Copyright */}
                 <div className="text-center md:text-left">
-                    <p className="text-sm font-light text-gray-400">
+                    <p className="text-fluid-xs font-light text-gray-400">
                         &copy; {currentYear} Divyank Khewale. <br className="md:hidden" />
                         All rights reserved.
                     </p>
@@ -52,12 +52,12 @@ export default function Footer() {
                             className="group relative block transition-transform duration-300 hover:scale-110"
                             aria-label={link.name}
                         >
-                            <div className="relative w-6 h-6 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="relative w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
                                 <Image
                                     src={link.icon}
                                     alt={link.name}
                                     fill
-                                    className="object-contain invert" // Invert because likely black SVGs on black bg need to be white
+                                    className="object-contain invert opacity-80 group-hover:opacity-100 transition-opacity"
                                     style={{ filter: "invert(1)" }}
                                 />
                             </div>

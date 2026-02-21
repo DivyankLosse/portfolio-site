@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 export default function About() {
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -14,83 +14,71 @@ export default function About() {
         }
     };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 15 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1] as const
-            }
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
         }
     };
 
     return (
-        <section id="about" className="py-20 md:py-32 px-6 md:px-12 bg-black text-white relative z-20 mix-blend-difference">
+        <section id="about" className="py-[var(--spacing-fluid-section)] px-[var(--spacing-section-px)] bg-black text-white relative z-20 border-t border-white/10">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
                     variants={containerVariants}
-                    className="flex flex-col md:flex-row gap-12 md:gap-24"
+                    className="flex flex-col md:flex-row gap-[var(--spacing-fluid-gap)]"
                 >
                     {/* Left Column - Sticky Title */}
                     <div className="md:w-1/3">
                         <motion.h2
                             variants={itemVariants}
-                            className="text-xs md:text-sm font-bold tracking-widest uppercase text-blue-600 mb-4 md:mb-8"
+                            className="text-fluid-xs font-mono tracking-widest text-white/50 mb-4 block border-l border-white/20 pl-4"
                         >
-                            ( About Me )
+                            about me
                         </motion.h2>
                     </div>
 
                     {/* Right Column - Content */}
-                    <div className="md:w-2/3 flex flex-col gap-10 md:gap-12">
+                    <div className="md:w-2/3 flex flex-col gap-[var(--spacing-fluid-gap)]">
                         <motion.div variants={itemVariants}>
-                            <h3 className="text-2xl md:text-5xl font-light leading-tight mb-6 md:mb-8">
-                                Divyank Khewale — <span className="opacity-50">AI Engineer in the making.</span>
+                            <h3 className="text-[length:var(--text-fluid-h2)] font-light leading-[1.2] tracking-tight mb-6 md:mb-8 text-white/90">
+                                Hi, I'm Divyank. I enjoy working on AI projects and polishing them until they feel right.
                             </h3>
-                            <p className="text-lg md:text-xl leading-relaxed text-gray-400">
-                                I work with data, models, and code to turn ideas into intelligent systems.
-                                My background spans Data Analysis, Data Science, Machine Learning, and Deep Learning,
-                                and I enjoy building things that actually work — not just look good in notebooks.
+                            <p className="text-[length:var(--text-fluid-body)] leading-[1.6] text-white/80 font-light">
+                                I like building things and figuring out how they work. Whether that means training a new model, handling data, or piecing together a UI to interact with it, I like being hands-on.
                             </p>
                         </motion.div>
 
-                        <motion.div variants={itemVariants} className="flex flex-col gap-6 text-base md:text-lg leading-relaxed text-gray-400">
+                        <motion.div variants={itemVariants} className="flex flex-col gap-6 text-[length:var(--text-fluid-body)] leading-[1.6] text-white/70 font-light">
                             <p>
-                                I’m currently pursuing my B.Tech in Computer Science Engineering from G H Raisoni University, Amravati,
-                                where I’m sharpening my skills and occasionally arguing with datasets that don’t want to behave.
+                                I don't necessarily care about using the latest trendy framework. I just want the tools that get the job done efficiently and cleanly.
                             </p>
                             <p>
-                                Right now, my focus is simple: land a role in the AI field where I can build, learn, and ship meaningful work.
-                                I like clean logic, well-trained models, and solutions that make sense beyond theory.
-                            </p>
-                            <p>
-                                When I’m not working on AI, I’m probably refining my projects, optimizing pipelines,
-                                or thinking about how to make systems smarter (and slightly less dramatic).
+                                When I'm not coding, I'm probably experimenting or intentionally breaking something just to understand it better. I believe the best work happens when you stay curious, keep things simple, and are easy to work with.
                             </p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12 pt-8 border-t border-white/10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12 pt-12 border-t border-white/10">
                             <motion.div variants={itemVariants}>
-                                <h4 className="text-xs md:text-sm font-bold tracking-widest uppercase mb-6 text-white">What I Work With</h4>
-                                <ul className="flex flex-col gap-3 text-sm md:text-base text-gray-400">
-                                    <li>Data Analysis & Visualization</li>
-                                    <li>Machine Learning & Deep Learning</li>
-                                    <li>Model Training & Evaluation</li>
-                                    <li>Python-based AI workflows</li>
-                                    <li>Problem-solving with real-world datasets</li>
+                                <h4 className="text-fluid-xs font-bold font-mono tracking-widest text-white/40 mb-6 uppercase">What I value</h4>
+                                <ul className="flex flex-col gap-3 text-[length:var(--text-fluid-sm)] text-white/70 font-light">
+                                    <li>Honesty and simplicity over buzzwords</li>
+                                    <li>Having a cool, functioning final product</li>
+                                    <li>Learning how the black box actually works</li>
                                 </ul>
                             </motion.div>
 
                             <motion.div variants={itemVariants}>
-                                <h4 className="text-xs md:text-sm font-bold tracking-widest uppercase mb-6 text-white">Currently</h4>
-                                <ul className="flex flex-col gap-3 text-sm md:text-base text-gray-400">
-                                    <li>🎓 B.Tech CSE student</li>
-                                    <li>🤖 Focused on AI / ML roles</li>
+                                <h4 className="text-fluid-xs font-bold font-mono tracking-widest text-white/40 mb-6 uppercase">Current Focus</h4>
+                                <ul className="flex flex-col gap-3 text-[length:var(--text-fluid-sm)] text-white/70 font-light">
+                                    <li>Applied LLMs</li>
+                                    <li>Data exploration tools</li>
+                                    <li>Building side projects</li>
                                 </ul>
                             </motion.div>
                         </div>
@@ -98,6 +86,5 @@ export default function About() {
                 </motion.div>
             </div>
         </section>
-
     );
 }

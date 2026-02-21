@@ -39,8 +39,8 @@ ${formData.message}`;
         window.location.href = mailtoLink;
     };
 
-    const inputClasses = "w-full bg-transparent border-b border-white/20 py-4 text-white placeholder-white/40 focus:outline-none transition-colors duration-300";
-    const labelClasses = "block text-xs uppercase tracking-widest text-gray-400 mb-2";
+    const inputClasses = "w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-[length:var(--text-fluid-body)] text-white placeholder-white/40 focus:outline-none transition-colors duration-300";
+    const labelClasses = "block text-fluid-xs uppercase tracking-widest text-gray-400 mb-2";
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -181,7 +181,7 @@ ${formData.message}`;
             <motion.div variants={itemVariants} className="pt-8 flex flex-col md:flex-row gap-6 items-center">
                 <button
                     type="submit"
-                    className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full"
+                    className="group relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 overflow-hidden text-[length:var(--text-fluid-sm)] font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full"
                 >
                     <span className="absolute inset-0 flex items-center justify-center w-full h-full text-black duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -192,7 +192,7 @@ ${formData.message}`;
 
                 <Link
                     href="/"
-                    className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full hover:bg-white/10"
+                    className="group relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 overflow-hidden text-[length:var(--text-fluid-sm)] font-medium text-white transition duration-300 ease-out border border-white/30 rounded-full hover:bg-white/10"
                 >
                     <span className="relative">Back to Home</span>
                 </Link>

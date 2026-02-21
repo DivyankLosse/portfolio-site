@@ -51,20 +51,6 @@ export default function ScrollyCanvas() {
 
         const img = images[index];
 
-        // DPR Scaling
-        // We set the canvas "internal" size to (window * dpr)
-        // But the CSS size remains (window)
-        // Then we scale the context
-
-        // Wait, efficient way:
-        // Set canvas.width = clientWidth * dpr
-        // Set canvas.height = clientHeight * dpr
-        // No need to scale context if we draw image with new dimensions?
-        // Actually, we must calculate draw dimensions based on the high-res canvas.
-
-        const dpr = window.devicePixelRatio || 1;
-
-        // Maintain object-fit: cover logic using the CANVAS dimensions (which are already high-res)
         const canvasWidth = canvas.width;
         const canvasHeight = canvas.height;
 
@@ -95,10 +81,6 @@ export default function ScrollyCanvas() {
                 const dpr = window.devicePixelRatio || 1;
                 canvasRef.current.width = window.innerWidth * dpr;
                 canvasRef.current.height = window.innerHeight * dpr;
-
-                // IMPORTANT: Scale the context? 
-                // No, because we are drawing an image. We just need to draw it larger to fill the larger pixels.
-                // renderFrame() handles covering the new large width/height.
 
                 if (isLoaded) {
                     const progress = scrollYProgress.get();
@@ -151,14 +133,14 @@ export default function ScrollyCanvas() {
                             transition={{ duration: 0.5 }}
                             className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-50"
                         >
-                            <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden mb-4">
+                            <div className="w-48 md:w-64 h-[2px] bg-white/10 overflow-hidden mb-6">
                                 <motion.div
-                                    className="h-full bg-white"
+                                    className="h-full bg-white/80"
                                     initial={{ width: 0 }}
                                     animate={{ width: `${loadingProgress}%` }}
                                 />
                             </div>
-                            <span className="text-white/50 font-mono text-xs tracking-widest">
+                            <span className="text-white/40 font-mono text-fluid-xs tracking-[0.3em]">
                                 LOADING EXPERIENCE {loadingProgress}%
                             </span>
                         </motion.div>

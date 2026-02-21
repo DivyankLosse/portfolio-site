@@ -5,13 +5,13 @@ import About from "@/components/About";
 
 export default function Home() {
   return (
-    <main className="bg-black min-h-screen">
+    <main className="relative bg-black min-h-screen">
       <ScrollyCanvas />
 
       <div className="relative z-20 bg-black">
+        <Projects />
         <About />
         <Services />
-        <Projects />
       </div>
 
 

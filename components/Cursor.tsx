@@ -48,7 +48,7 @@ export default function Cursor() {
                 }}
                 animate={{
                     scale: isHovering ? 2.5 : 1,
-                    backgroundColor: isHovering ? "rgba(255, 255, 255, 0.1)" : "transparent",
+                    backgroundColor: isHovering ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 255, 255, 0)",
                     borderColor: isHovering ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 0.3)",
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}

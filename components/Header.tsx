@@ -28,7 +28,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-6 md:px-12 md:py-8 mix-blend-difference text-white"
+                className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-[var(--spacing-section-px)] py-6 mix-blend-difference text-white"
             >
                 <Link href="/" className="hover:opacity-70 transition-opacity" onClick={() => {
                     if (lenis) lenis.scrollTo(0);
@@ -42,23 +42,24 @@ export default function Header() {
                         <Image
                             src="/logo.svg"
                             alt="Divyank Khewale"
-                            width={100}
-                            height={33}
-                            className="invert w-24 md:w-32"
+                            width={80}
+                            height={26}
+                            className="invert w-20 md:w-28"
                             style={{ filter: 'invert(1)' }}
                         />
                     </motion.div>
                 </Link>
 
-                <nav className="hidden md:flex items-center gap-12 text-xs font-bold tracking-[0.2em] uppercase">
-                    <a href="#about" className="hover:text-blue-500 transition-colors">About</a>
-                    <a href="#work" className="hover:text-blue-500 transition-colors">Work</a>
+                <nav className="hidden md:flex items-center gap-12 text-xs font-[500] tracking-widest uppercase">
+                    <a href="#about" className="hover:text-white/70 transition-colors">About</a>
+                    <a href="#work" className="hover:text-white/70 transition-colors">Work</a>
+                    <a href="#skills" className="hover:text-white/70 transition-colors">Skills</a>
                 </nav>
 
                 <div className="flex items-center gap-6">
                     <Link
                         href="/contact"
-                        className="hidden md:block px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                        className="hidden md:block px-5 py-2 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
                     >
                         Send Inquiry
                     </Link>
@@ -69,7 +70,7 @@ export default function Header() {
                         className="md:hidden z-50 p-2 -mr-2 text-white"
                         aria-label="Toggle Menu"
                     >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </motion.header>
@@ -82,16 +83,16 @@ export default function Header() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center p-8 md:hidden"
+                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-8 md:hidden"
                     >
-                        <nav className="flex flex-col items-center gap-8 text-2xl font-light tracking-widest uppercase">
+                        <nav className="flex flex-col items-center gap-6 text-xl font-light tracking-widest uppercase">
                             <motion.a
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                                 href="#about"
                                 onClick={closeMenu}
-                                className="hover:text-blue-500 transition-colors"
+                                className="hover:text-white/70 transition-colors"
                             >
                                 About
                             </motion.a>
@@ -101,9 +102,19 @@ export default function Header() {
                                 transition={{ delay: 0.3 }}
                                 href="#work"
                                 onClick={closeMenu}
-                                className="hover:text-blue-500 transition-colors"
+                                className="hover:text-white/70 transition-colors"
                             >
                                 Work
+                            </motion.a>
+                            <motion.a
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.35 }}
+                                href="#skills"
+                                onClick={closeMenu}
+                                className="hover:text-white/70 transition-colors"
+                            >
+                                Skills
                             </motion.a>
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -113,7 +124,7 @@ export default function Header() {
                                 <Link
                                     href="/contact"
                                     onClick={closeMenu}
-                                    className="px-8 py-3 text-sm font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                                    className="px-6 py-2.5 text-[11px] font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
                                 >
                                     Send Inquiry
                                 </Link>
