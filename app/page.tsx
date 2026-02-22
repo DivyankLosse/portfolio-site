@@ -9,9 +9,9 @@ export default function Home() {
       <ScrollyCanvas />
 
       <div className="relative z-20 bg-black">
-        <Projects />
         <About />
         <Services />
+        <Projects />
       </div>
 
 
