@@ -49,7 +49,7 @@ export default function RecruiterMode() {
 
           <motion.a
             variants={itemVariants}
-            href="mailto:contact@example.com" // Update this placeholder
+            href="mailto:chinmaykhewale2005@gmail.com"
             className="flex items-center gap-2 px-6 py-3 rounded-xl glass-panel hover:glass-panel-hover transition-all group bg-primary/10 border-primary/30"
           >
             <Briefcase className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />

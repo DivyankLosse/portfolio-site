@@ -1,9 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Loader2, Check } from "lucide-react";
+import { useState } from "react";
+
+const EMAIL = "chinmaykhewale2005@gmail.com";
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const update = (field: keyof typeof form) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm((f) => ({ ...f, [field]: e.target.value }));
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+      setError(data.error ?? "Could not send the message.");
+      setStatus("error");
+    } catch {
+      setError("Could not reach the server.");
+      setStatus("error");
+    }
+  }
+
+  // Everything the visitor typed, handed to their mail client. Used when the
+  // server cannot send, so a message is never silently lost.
+  const mailtoFallback = `mailto:${EMAIL}?subject=${encodeURIComponent(
+    `Portfolio enquiry from ${form.name || "a visitor"}`
+  )}&body=${encodeURIComponent(form.message)}`;
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden bg-background">
       <div className="container mx-auto px-6 relative z-10">
@@ -47,13 +93,13 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
                 
                 <div className="space-y-6">
-                  <a href="mailto:divyankkhewale@example.com" className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group">
+                  <a href="mailto:chinmaykhewale2005@gmail.com" className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group">
                     <div className="p-4 rounded-full bg-background border border-border group-hover:border-primary/50 transition-colors">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-sm tracking-widest uppercase mb-1">Email</p>
-                      <p className="text-foreground font-medium">divyankkhewale@example.com</p>
+                      <p className="text-foreground font-medium">chinmaykhewale2005@gmail.com</p>
                     </div>
                   </a>
                   
@@ -84,25 +130,76 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Contact Form Placeholder */}
+              {/* Contact Form */}
               <div className="bg-background/50 p-6 rounded-2xl border border-border">
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Name</label>
-                    <input type="text" className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="John Doe" />
+                    <label htmlFor="contact-name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Name</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      required
+                      maxLength={100}
+                      value={form.name}
+                      onChange={update("name")}
+                      disabled={status === "sending"}
+                      className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
+                    />
                   </div>
                   <div>
-                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Email</label>
-                    <input type="email" className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com" />
+                    <label htmlFor="contact-email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Email</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      required
+                      maxLength={200}
+                      value={form.email}
+                      onChange={update("email")}
+                      disabled={status === "sending"}
+                      className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
+                    />
                   </div>
                   <div>
-                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Message</label>
-                    <textarea rows={4} className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors resize-none" placeholder="How can I help you?"></textarea>
+                    <label htmlFor="contact-message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Message</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={4}
+                      required
+                      maxLength={5000}
+                      value={form.message}
+                      onChange={update("message")}
+                      disabled={status === "sending"}
+                      className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors resize-none disabled:opacity-50"
+                    />
                   </div>
-                  <button className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-bold uppercase tracking-wider hover:bg-secondary hover:text-secondary-foreground transition-all duration-300">
-                    Send Message
-                    <Send className="w-4 h-4" />
+
+                  <button
+                    type="submit"
+                    disabled={status === "sending" || status === "sent"}
+                    className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-bold uppercase tracking-wider hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 disabled:opacity-60 disabled:hover:bg-primary disabled:hover:text-primary-foreground"
+                  >
+                    {status === "sending" && (<><Loader2 className="w-4 h-4 animate-spin" aria-hidden />Sending</>)}
+                    {status === "sent" && (<><Check className="w-4 h-4" aria-hidden />Message sent</>)}
+                    {(status === "idle" || status === "error") && (<>Send Message<Send className="w-4 h-4" aria-hidden /></>)}
                   </button>
+
+                  <p aria-live="polite" className="text-sm min-h-[1.25rem]">
+                    {status === "sent" && (
+                      <span className="text-primary">Thanks — I&apos;ll get back to you.</span>
+                    )}
+                    {status === "error" && (
+                      <span className="text-muted-foreground">
+                        {error}{" "}
+                        <a href={mailtoFallback} className="text-primary underline underline-offset-4">
+                          Email me directly instead
+                        </a>
+                        .
+                      </span>
+                    )}
+                  </p>
                 </form>
               </div>
 
