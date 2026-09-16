@@ -1,10 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Trophy } from "lucide-react";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 type Stat = { label: string; value: number };
+
+// From the Achievements section of the CV in
+// public/Divyank_Khewale_Resume.pdf.
+const CREDENTIAL = {
+  title: "Finalist — India's largest AI hackathon",
+  detail:
+    "Among 56,000+ participants, hosted by Meta, Hugging Face, PyTorch and Scaler School of Technology.",
+};
 
 type GithubStats = {
   publicRepos: number | null;
@@ -79,13 +88,27 @@ export default function Achievements() {
     };
   }, []);
 
-  if (!stats?.length) return null;
-
   return (
     <section className="py-24 border-y border-border/50 relative overflow-hidden bg-background">
       <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto mb-12 flex items-start gap-5 p-6 rounded-2xl glass-panel"
+        >
+          <div className="shrink-0 p-3 rounded-full bg-primary/10 border border-primary/30">
+            <Trophy className="w-6 h-6 text-primary" aria-hidden />
+          </div>
+          <div>
+            <h3 className="text-lg md:text-xl font-bold mb-1">{CREDENTIAL.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{CREDENTIAL.detail}</p>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 text-center">
-          {stats.map((stat, index) => (
+          {(stats ?? []).map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}

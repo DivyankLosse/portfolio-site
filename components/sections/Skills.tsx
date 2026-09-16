@@ -2,22 +2,65 @@
 
 import { motion } from "framer-motion";
 
+// Mirrors the Technical Skills section of the CV in
+// public/Divyank_Khewale_Resume.pdf, including its "(Basics)" qualifiers --
+// those are deliberate and should not be dropped. Next.js and TypeScript are
+// the two additions, both evidenced by this repository itself.
 const skillsData = [
   {
-    category: "AI & ML",
-    items: ["Python", "PyTorch", "TensorFlow", "Scikit-Learn", "Reinforcement Learning", "NLP", "Computer Vision", "Data Processing"],
+    category: "AI / ML & GenAI",
+    items: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Generative AI",
+      "LLM Development",
+      "OpenCV",
+      "Scikit-Learn",
+      "NLP",
+      "Computer Vision",
+      "Reinforcement Learning",
+      "MLOps",
+    ],
     color: "border-primary text-primary bg-primary/10",
   },
   {
-    category: "Development",
-    items: ["React", "Next.js", "TypeScript", "Node.js", "FastAPI", "PostgreSQL", "Redis", "GraphQL"],
+    category: "Web & App Development",
+    items: [
+      "React (Basics)",
+      "Next.js",
+      "TypeScript",
+      "MERN Stack (Basics)",
+      "FastAPI",
+      "REST APIs",
+      "MongoDB",
+    ],
     color: "border-secondary text-secondary bg-secondary/10",
   },
   {
-    category: "Tools & DevOps",
-    items: ["Git", "Docker", "AWS", "Linux", "VS Code", "CI/CD", "Jira", "Figma"],
+    category: "Deployment & DevOps",
+    items: [
+      "Git & GitHub",
+      "Docker",
+      "CI/CD",
+      "Vercel",
+      "Render",
+      "VPS Deployment",
+      "Model Deployment",
+    ],
     color: "border-violet-400 text-violet-400 bg-violet-400/10",
-  }
+  },
+  {
+    category: "Data & Cloud",
+    items: [
+      "Data Science",
+      "Data Analytics",
+      "Data Pipelines",
+      "AWS (Basics)",
+      "Automation Pipelines",
+    ],
+    color: "border-amber-400 text-amber-400 bg-amber-400/10",
+  },
 ];
 
 export default function Skills() {
