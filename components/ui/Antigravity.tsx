@@ -1,4 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 import React, { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -44,6 +45,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
+  const reducedMotion = useReducedMotion();
 
   const particles = useMemo(() => {
     const temp = [];
@@ -89,6 +91,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   useFrame(state => {
     const mesh = meshRef.current;
     if (!mesh) return;
+    // Particles hold their initial positions rather than drifting.
+    if (reducedMotion) return;
 
     const { viewport: v, pointer: m } = state;
 

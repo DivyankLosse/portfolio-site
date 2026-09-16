@@ -122,7 +122,7 @@ inspection. Every item below was observed, not inferred.
 |---|---|---|
 | A1 | **Project tech stacks and architectures are fabricated.** See section B. | Cross-checked against repo metadata and the CV |
 | A2 | **Four `PLACEHOLDER` strings render as visible text** — one profile image in About, three screenshot boxes in Projects | `innerText` match count: 4 |
-| A3 | **Hero takes ~19 s to become visible.** The page is black through the intro sequence; first paint of hero copy came only after two 9 s waits | Repeated screenshots during load |
+| A3 | ~~Hero takes ~19 s to become visible~~ — **withdrawn.** That figure was measured against `next dev`, where Turbopack compiles the three.js bundle on demand. Measured against a production server the same page reports DOMContentLoaded 30 ms and load 297 ms. The dev-mode number was not a user-facing defect | `npx next start`, Navigation Timing API |
 | A4 | **The floating header pill overlaps content at every scroll position.** The logo tile is an opaque black square that sits over whatever is behind it — hero eyebrow text, "Quick Actions", section headings | Visible in every desktop screenshot |
 
 ## B. Fabricated project data
@@ -159,9 +159,10 @@ right half is empty as a result — only the Antigravity particle canvas renders
 
 ## D. Accessibility
 
-- **`prefers-reduced-motion` is not handled anywhere.** No stylesheet contains the media query. On a
-  site built on GSAP, Lenis smooth scroll, Framer Motion and a WebGL canvas, this is the single
-  largest accessibility gap.
+- ~~`prefers-reduced-motion` is not handled anywhere.~~ **Fixed.** Now honoured across Framer Motion
+  (`MotionConfig reducedMotion="user"`), Lenis (not instantiated), the particle canvas (frame loop
+  short-circuits) and CSS. Correction to the original finding: GSAP is listed in `package.json` but
+  is **not imported anywhere in the app**, so it was never part of the motion stack.
 - **Heading order starts at H2 before the H1** (`H2,H1,H3,...`).
 - Good: all 5 images carry `alt`, no button lacks an accessible name, and after the fixes below no
   `href="#"` links remain.

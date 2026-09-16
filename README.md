@@ -34,7 +34,7 @@ checked and responded.
 - **Framework** — Next.js 16 (App Router, Turbopack), React 19
 - **Language** — TypeScript
 - **Styling** — Tailwind CSS 4, shadcn-style primitives
-- **Motion** — GSAP, Framer Motion, Lenis smooth scroll
+- **Motion** — Framer Motion, Lenis smooth scroll, all gated on `prefers-reduced-motion`
 - **3D** — three.js via react-three-fiber and drei
 - **Mail** — Resend, called over `fetch` with no SDK dependency
 
@@ -123,6 +123,20 @@ substituted with placeholders.
 Deploys to Vercel as a standard Next.js app. Set the environment variables above in the
 project settings; `GITHUB_PAT` and `RESEND_API_KEY` are the two that change behaviour.
 
+## Accessibility
+
+`prefers-reduced-motion` is honoured across all four motion layers:
+
+| Layer | Behaviour when reduced motion is set |
+|---|---|
+| Framer Motion | `MotionConfig reducedMotion="user"` in `app/layout.tsx` — transitions become instant |
+| Lenis | Not instantiated at all; native browser scrolling is left alone |
+| Particle canvas | Per-frame simulation short-circuits; particles hold position |
+| CSS | Animations and transitions collapsed to 0.01ms, `scroll-behavior: auto` |
+
+The shared `lib/useReducedMotion.ts` hook subscribes to the media query rather than
+reading it once, so toggling the OS setting mid-session takes effect immediately.
+
 ## Testing
 
 There is no automated test suite. Before shipping, the build must pass:
@@ -135,9 +149,9 @@ Type checking runs as part of the build and fails it on error.
 
 ## Future Improvements
 
-- Handle `prefers-reduced-motion` across the GSAP, Lenis and Framer Motion layers
-- Shorten the intro sequence, which currently delays first meaningful paint
+- Give the header a solid background; the logo tile currently overlaps content behind it
 - Wire up the character model in `public/models/`, or remove it — nothing requests it today
+- Remove the unused `gsap` dependency and the dead `LoadingProvider` / `Loading` pair
 - Add project screenshots
 - Add a profile photo at `public/profile.jpg`
 

@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState, createContext, useContext } from "react";
 import Lenis from "lenis";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 type LenisContextType = {
     lenis: Lenis | null;
@@ -15,8 +16,13 @@ export const useLenis = () => useContext(LenisContext);
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
     const [lenis, setLenis] = useState<Lenis | null>(null);
+    const reducedMotion = useReducedMotion();
 
     useEffect(() => {
+        // Smooth scroll is motion the viewer did not ask for; leave the
+        // browser's native scrolling alone when reduced motion is set.
+        if (reducedMotion) return;
+
         const lenisInstance = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -38,7 +44,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
             lenisInstance.destroy();
             setLenis(null);
         };
-    }, []);
+    }, [reducedMotion]);
 
     return (
         <LenisContext.Provider value={{ lenis }}>

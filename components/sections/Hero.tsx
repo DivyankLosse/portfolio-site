@@ -4,8 +4,16 @@ import { motion } from "framer-motion";
 import { ArrowRight, FileText, Mail } from "lucide-react";
 import Link from "next/link";
 
+import dynamic from "next/dynamic";
+
 import BlurText from "@/components/ui/BlurText";
-import Antigravity from "@/components/ui/Antigravity";
+
+// three.js is by far the heaviest thing on the page and the hero is readable
+// without it, so it loads after the copy rather than blocking it.
+const Antigravity = dynamic(() => import("@/components/ui/Antigravity"), {
+  ssr: false,
+  loading: () => null,
+});
 
 
 

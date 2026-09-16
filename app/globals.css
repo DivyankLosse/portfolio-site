@@ -112,3 +112,21 @@
   border: 1px solid rgba(79, 140, 255, 0.2);
   box-shadow: 0 0 20px rgba(79, 140, 255, 0.15);
 }
+/* Anything animated by CSS rather than by Framer Motion. Framer is handled by
+   MotionConfig reducedMotion="user" in app/layout.tsx, Lenis and the particle
+   canvas by the useReducedMotion hook. scroll-behavior matters here because
+   anchor links in the nav jump between sections. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

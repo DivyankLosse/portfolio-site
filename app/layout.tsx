@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import Header from "@/components/Header";
@@ -52,10 +53,12 @@ export default function RootLayout({
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-background text-foreground cursor-none`}>
         <Cursor />
         <Header />
-        <SmoothScroll>
+        <MotionConfig reducedMotion="user">
+          <SmoothScroll>
           {children}
           <Footer />
         </SmoothScroll>
+        </MotionConfig>
       </body>
     </html>
   );
