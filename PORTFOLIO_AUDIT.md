@@ -1,0 +1,107 @@
+# Portfolio Audit — DivyankLosse
+
+Generated: 2026-09-16. Facts below are from `gh` API calls, HTTP checks, and local builds run on this machine. Nothing is estimated.
+
+---
+
+## 1. Repository Inventory
+
+17 repositories under `DivyankLosse` (0 forks, 0 archived).
+
+| Repo | Lang | Vis | Last push | Size | README | Topics | Demo |
+|---|---|---|---|---|---|---|---|
+| astro-guru | TypeScript | private | 2026-09-15 | 131 MB | 3.3 KB | none | none |
+| classroom_monitor | Python | private | 2026-09-08 | 16 MB | 1.4 KB | none | none |
+| posture-report-hub | Python | private | 2026-08-28 | 8 MB | 3.9 KB | none | none |
+| posture-guardian | Python | public | 2026-08-25 | 5 MB | 5.4 KB | 12 | none |
+| Schedular | TypeScript | private | 2026-07-05 | 1.4 MB | 2.4 KB | none | **200 OK** |
+| portfolio | SCSS | private | 2026-05-23 | 16 MB | **missing** | none | **404 DEAD** |
+| EcoGrid | Python | public | 2026-04-26 | 855 KB | 3.7 KB | none | none |
+| SSS-Startup-Survival-Simulator | Python | public | 2026-04-25 | 588 KB | 9.5 KB | none | none |
+| Sign-Bridge | JavaScript | public | 2026-04-14 | 65 MB | 2.0 KB | none | **404 DEAD** |
+| AgriLO | JavaScript | public | 2026-04-01 | 211 MB | 3.8 KB | 8 | **200 OK** |
+| Customer-Retention | Python | private | 2026-03-20 | 7.8 MB | **missing** | none | none |
+| videospark-studio | TypeScript | private | 2026-03-14 | 282 KB | 2.1 KB | none | none |
+| Taizo-VideoAI | TypeScript | public | 2026-03-14 | 329 KB | 1.9 KB | none | none |
+| DivyankLosse (profile) | — | public | 2026-02-13 | 14 KB | 4.8 KB | 2 | — |
+| IPL-data-Viz- | — | public | 2026-01-27 | 0 KB | **missing** | none | none |
+| Hospital-Management-System | Python | public | 2025-04-08 | 1 MB | 4.1 KB | none | none |
+| Hotel-Billing-System | Jupyter | public | 2024-09-05 | 5 KB | 40 B stub | none | none |
+
+### Classification
+
+**A. FLAGSHIP** — `astro-guru`, `posture-guardian`, `AgriLO`, `Sign-Bridge`, and this portfolio site.
+**B. ACTIVE** — `Schedular`, `classroom_monitor`, `posture-report-hub`, `EcoGrid`, `Taizo-VideoAI`, `videospark-studio`.
+**C. DEAD / BROKEN** — this portfolio site (build fails, remote missing), `portfolio` (demo 404, no README), `Sign-Bridge` (demo 404).
+**D. PROTOTYPE** — `SSS-Startup-Survival-Simulator`, `Customer-Retention`, `IPL-data-Viz-`.
+**E. ARCHIVE** — `Hotel-Billing-System`, `Hospital-Management-System` (2024–2025 coursework).
+
+---
+
+## 2. Portfolio Status (local: `D:\Projects\Portfolio`)
+
+Next.js 16.2.6 / React 19 / Tailwind 4 / GSAP / three.js + react-three-fiber. A substantial in-progress rebuild: 32 uncommitted paths, last commit `e0af7c4`.
+
+**Blocking problems, in order:**
+
+1. **The git remote does not exist.** `origin` points at `https://github.com/DivyankLosse/portfolio-site.git`, which returns HTTP 404 from the GitHub API. None of the rebuild can be pushed anywhere. A separate `portfolio` repo (SCSS, private) does exist and holds the older site, whose Vercel demo is 404.
+2. **`npm run build` fails.** Compilation succeeds in 6.3 s; type checking then fails at `components/sections/Hero.tsx:64` — `BlurText` is called without its required `animationFrom`, `animationTo`, and `onAnimationComplete` props. This is the only type error in application code.
+3. **`react-bits-temp/` — 118 MB of vendored scratch library source** sitting untracked in the project root. It is inside the `tsconfig` include set and contributes ~20 further type errors (missing `ogl`, `gl-matrix`, `@react-three/rapier`, `matter-js`, `react-router-dom`). Committing it would balloon the repo; it should be removed or gitignored once the components in use are copied into `components/`.
+4. **Stale artifacts committed to the working tree** — `build_output.txt` (UTF-16, references a `components/reference/` directory that no longer exists) and `tsc_errors.log`. Both are obsolete and should be deleted and gitignored.
+
+---
+
+## 3. Security Findings
+
+- `.env` exists locally, holds one key (`GITHUB_PAT`), is matched by `.gitignore:34` (`.env*`), is untracked, and **never appears in git history**. No leak.
+- `GITHUB_PAT` is read server-side only, in `app/api/github/route.ts:6`. No `NEXT_PUBLIC_` exposure anywhere in `app/`, `lib/`, or `components/`. Correct.
+- **Missing:** no `.env.example` documenting `GITHUB_PAT` for anyone cloning the repo.
+- Wider secret scanning across the other 16 repositories has **not** been run yet.
+
+---
+
+## 4. Repository Quality Gaps
+
+- **15 of 17 repos have no topics.** Only `posture-guardian` and `AgriLO` are tagged. Topics drive GitHub search discovery.
+- **3 repos have no README** (`portfolio`, `Customer-Retention`, `IPL-data-Viz-`); `Hotel-Billing-System`'s is a 40-byte stub.
+- **`IPL-data-Viz-` is 0 KB** — an empty repo with a long description promising analysis that contains no code. The trailing hyphen in the name is also a typo.
+- **No repo has a description** except `posture-guardian`, `AgriLO`, `Taizo-VideoAI`, `IPL-data-Viz-`, `Hospital-Management-System`, `Hotel-Billing-System`.
+- **`AgriLO` is 211 MB and `Sign-Bridge` 65 MB** — likely committed binaries or model weights; not yet inspected.
+- No GitHub Actions workflows checked yet on any repo.
+
+---
+
+## 5. Deployment Status
+
+| Project | URL | Status |
+|---|---|---|
+| Schedular | schedular-seven.vercel.app | Live (200) |
+| AgriLO | agri-lo-six.vercel.app | Live (200) |
+| portfolio (old) | portfolio-liart-ten-…vercel.app | **Dead (404)** |
+| Sign-Bridge | sign-bridge-chi.vercel.app | **Dead (404)** |
+
+Both dead URLs are still advertised in their repositories' `homepage` field, so GitHub shows a broken link on each repo page.
+
+---
+
+## 6. Not Yet Investigated
+
+Discovery so far covered GitHub metadata, the live-URL checks, and a full local build of the portfolio only. Still outstanding: cloning and running the other 16 repos, their dependency health, their CI, model-file handling in the AI/ML repos, and the current content of the profile README.
+
+---
+
+## 7. Recommended Execution Order
+
+1. **Unblock the portfolio** — fix the `BlurText` type error so the build is green, remove `react-bits-temp/` and the stale logs, add `.env.example`.
+2. **Resolve the remote question** (needs your decision — see below), then commit and push the rebuild.
+3. **Portfolio content and QA** — real project data for the flagship repos, responsive and accessibility passes, no dead demo links.
+4. **Kill the broken links** — clear or correct the `homepage` field on `portfolio` and `Sign-Bridge`; decide whether to redeploy either.
+5. **Repository hygiene sweep** — descriptions, topics, and READMEs across all 17; secret scan; decide the fate of `IPL-data-Viz-`.
+6. **Flagship deep work** — `astro-guru`, `posture-guardian`, `AgriLO`, `Sign-Bridge`: run locally, verify, document, revive.
+7. **Profile README** — refresh once the flagship set is settled.
+
+## 8. Needs Your Input
+
+- **The portfolio remote.** `portfolio-site` does not exist on GitHub. Create it and push the rebuild there, or re-point `origin` at the existing private `portfolio` repo and overwrite the old SCSS site?
+- **`IPL-data-Viz-`** is empty. Delete it, or rebuild the project it describes?
+- **The dead Vercel deployments.** Redeploying needs access to your Vercel account; I can make the repos deployment-ready but cannot deploy them.

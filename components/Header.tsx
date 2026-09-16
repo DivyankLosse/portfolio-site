@@ -28,7 +28,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-[var(--spacing-section-px)] py-6 mix-blend-difference text-white"
+                className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 py-4 glass-panel rounded-full w-[95%] max-w-6xl text-foreground"
             >
                 <Link href="/" className="hover:opacity-70 transition-opacity" onClick={() => {
                     if (lenis) lenis.scrollTo(0);
@@ -58,8 +58,8 @@ export default function Header() {
 
                 <div className="flex items-center gap-6">
                     <Link
-                        href="/contact"
-                        className="hidden md:block px-5 py-2 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                        href="/#contact"
+                        className="hidden md:block px-5 py-2 text-[10px] font-bold tracking-[0.2em] uppercase border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(79,140,255,0.3)] hover:shadow-[0_0_25px_rgba(79,140,255,0.6)]"
                     >
                         Send Inquiry
                     </Link>
@@ -122,7 +122,7 @@ export default function Header() {
                                 transition={{ delay: 0.4 }}
                             >
                                 <Link
-                                    href="/contact"
+                                    href="/#contact"
                                     onClick={closeMenu}
                                     className="px-6 py-2.5 text-[11px] font-bold tracking-[0.2em] uppercase border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300"
                                 >
