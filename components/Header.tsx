@@ -52,7 +52,7 @@ export default function Header() {
 
                 <nav className="hidden md:flex items-center gap-12 text-xs font-[500] tracking-widest uppercase">
                     <a href="#about" className="hover:text-white/70 transition-colors">About</a>
-                    <a href="#work" className="hover:text-white/70 transition-colors">Work</a>
+                    <a href="#projects" className="hover:text-white/70 transition-colors">Work</a>
                     <a href="#skills" className="hover:text-white/70 transition-colors">Skills</a>
                 </nav>
 
@@ -100,7 +100,7 @@ export default function Header() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                href="#work"
+                                href="#projects"
                                 onClick={closeMenu}
                                 className="hover:text-white/70 transition-colors"
                             >
@@ -134,9 +134,20 @@ export default function Header() {
                         <div className="absolute bottom-12 text-center">
                             <p className="text-gray-500 text-xs tracking-widest uppercase mb-4">Socials</p>
                             <div className="flex gap-6 text-sm font-mono tracking-tighter">
-                                <a href="#" className="hover:text-blue-500 transition-colors">LI /</a>
-                                <a href="#" className="hover:text-blue-500 transition-colors">GH /</a>
-                                <a href="#" className="hover:text-blue-500 transition-colors">TW</a>
+                                <a
+                                    href="https://github.com/DivyankLosse"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="hover:text-blue-500 transition-colors"
+                                >
+                                    GH /
+                                </a>
+                                <a
+                                    href="mailto:chinmaykhewale2005@gmail.com"
+                                    className="hover:text-blue-500 transition-colors"
+                                >
+                                    EMAIL
+                                </a>
                             </div>
                         </div>
                     </motion.div>

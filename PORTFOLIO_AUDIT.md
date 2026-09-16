@@ -108,3 +108,77 @@ Discovery so far covered GitHub metadata, the live-URL checks, and a full local 
 - **Point Vercel at the new repo.** `divyankkhewale.vercel.app` currently builds from the old GSAP site, not from `portfolio-site`. Switching the Vercel project's Git source (and setting `GITHUB_PAT` in its environment variables) is a dashboard action only you can take.
 - **`IPL-data-Viz-` deletion is blocked.** The `gh` token lacks the `delete_repo` scope. Run `gh auth refresh -h github.com -s delete_repo` in an interactive terminal, then I can delete it.
 - **The other dead deployment.** `Sign-Bridge` still advertises a 404 demo. I can make the repo deployment-ready but cannot deploy it.
+
+---
+
+# Frontend Design Review — 2026-09-16
+
+Conducted against the running app at 1440x900 and 375x812, with DOM and network
+inspection. Every item below was observed, not inferred.
+
+## A. Blocking — fix before the site goes live
+
+| # | Finding | Evidence |
+|---|---|---|
+| A1 | **Project tech stacks and architectures are fabricated.** See section B. | Cross-checked against repo metadata and the CV |
+| A2 | **Four `PLACEHOLDER` strings render as visible text** — one profile image in About, three screenshot boxes in Projects | `innerText` match count: 4 |
+| A3 | **Hero takes ~19 s to become visible.** The page is black through the intro sequence; first paint of hero copy came only after two 9 s waits | Repeated screenshots during load |
+| A4 | **The floating header pill overlaps content at every scroll position.** The logo tile is an opaque black square that sits over whatever is behind it — hero eyebrow text, "Quick Actions", section headings | Visible in every desktop screenshot |
+
+## B. Fabricated project data
+
+The same class of problem as the removed Experience entries. Each claim below is
+contradicted by a source you control.
+
+**SSS Startup Survival Simulator** — site claims `Next.js, Python, FastAPI, PostgreSQL, Redis, AWS`
+and "microservices architecture deployed on AWS, utilizing a highly concurrent game engine backend".
+The repository is 588 KB of Python. The CV describes it as "LLM Agents, OpenEnv" and "an AI
+simulation environment using LLM agents". Next.js, PostgreSQL, Redis, AWS, the microservices claim
+and the game engine claim have no support. The site also says "reinforcement learning principles"
+where the CV says LLM agents.
+
+**AgriLO** — site claims `React Native, TensorFlow, Django, IoT Data Pipeline`. The repository's own
+topics, which you set, are `fastapi, mongodb, react, razorpay, iot, agritech`. Django contradicts
+FastAPI; React Native contradicts React. MongoDB and Razorpay are missing entirely.
+
+**Sign-Bridge** — site claims `Python, MediaPipe, PyTorch, React, WebRTC`. The repository's primary
+language is JavaScript. The CV says "React + Vite frontend, FastAPI backend, and MongoDB". FastAPI,
+Vite and MongoDB are absent; PyTorch and WebRTC are unsupported.
+
+## C. Dead weight in the repository
+
+| Item | Size | Status |
+|---|---|---|
+| `public/models/` (character.glb, character.enc, decrypt.cjs, .hdr) | 4.1 MB | **Never requested.** No code references `.glb`, `useGLTF`, or `.enc` |
+| `public/draco/` (decoder js + wasm) | 984 KB | **Never requested.** No `DRACOLoader` anywhere |
+| `components/Antigravity.jsx` | orphan | Only `components/ui/Antigravity.tsx` is imported; the two differ by 374 lines |
+| `file.svg`, `window.svg`, `globe.svg`, `next.svg`, `vercel.svg` | small | Next.js starter leftovers, unreferenced |
+
+Roughly 5 MB of binary assets ship in the repo for a 3D character that never loads. The hero's
+right half is empty as a result — only the Antigravity particle canvas renders.
+
+## D. Accessibility
+
+- **`prefers-reduced-motion` is not handled anywhere.** No stylesheet contains the media query. On a
+  site built on GSAP, Lenis smooth scroll, Framer Motion and a WebGL canvas, this is the single
+  largest accessibility gap.
+- **Heading order starts at H2 before the H1** (`H2,H1,H3,...`).
+- Good: all 5 images carry `alt`, no button lacks an accessible name, and after the fixes below no
+  `href="#"` links remain.
+
+## E. Fixed in this pass
+
+- Nav "Work" pointed at `#work`, which does not exist — the section id is `projects`. Fixed in both
+  the desktop and mobile nav.
+- The mobile menu's `LI / GH / TW` row was three `href="#"` dead links. Replaced with a working
+  GitHub link and an email link.
+
+## F. Recommended, in order
+
+1. Replace the fabricated project data with what the repos and CV actually support.
+2. Add real screenshots, or drop the placeholder boxes and let the cards be text-only.
+3. Add a profile photo, or remove the About image panel.
+4. Either wire up the 3D character the assets were committed for, or delete the 5 MB.
+5. Shorten the intro sequence, and gate it behind `prefers-reduced-motion`.
+6. Give the header a solid background or move the logo out of the content column.
+7. Write a README. The repo is public and has none.
