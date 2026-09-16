@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -39,10 +40,18 @@ export default function About() {
             className="relative"
           >
             <div className="aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden glass-panel relative group">
-              {/* Placeholder for Profile Image */}
+              {/* Drop a photo at public/profile.jpg and swap this block for a
+                  next/image fill. Until then the panel carries the monogram
+                  rather than announcing a missing asset. */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 mix-blend-overlay z-10" />
               <div className="w-full h-full bg-muted flex items-center justify-center">
-                <span className="text-muted-foreground/50 font-mono text-sm tracking-widest uppercase">[ Profile Image Placeholder ]</span>
+                <Image
+                  src="/logo.svg"
+                  alt=""
+                  width={128}
+                  height={128}
+                  className="w-32 h-32 opacity-40"
+                />
               </div>
               
               {/* Decorative elements */}
