@@ -42,6 +42,8 @@ Generated: 2026-09-16. Facts below are from `gh` API calls, HTTP checks, and loc
 
 Next.js 16.2.6 / React 19 / Tailwind 4 / GSAP / three.js + react-three-fiber. A substantial in-progress rebuild: 32 uncommitted paths, last commit `e0af7c4`.
 
+**Resolved 2026-09-16:** `portfolio-site` created (private), remote re-pointed, build green, rebuild pushed as `3a28c3b`. The four problems below are kept as the record of what was wrong.
+
 **Blocking problems, in order:**
 
 1. **The git remote does not exist.** `origin` points at `https://github.com/DivyankLosse/portfolio-site.git`, which returns HTTP 404 from the GitHub API. None of the rebuild can be pushed anywhere. A separate `portfolio` repo (SCSS, private) does exist and holds the older site, whose Vercel demo is 404.
@@ -78,6 +80,7 @@ Next.js 16.2.6 / React 19 / Tailwind 4 / GSAP / three.js + react-three-fiber. A 
 | Schedular | schedular-seven.vercel.app | Live (200) |
 | AgriLO | agri-lo-six.vercel.app | Live (200) |
 | portfolio (old) | portfolio-liart-ten-…vercel.app | **Dead (404)** |
+| portfolio (live) | divyankkhewale.vercel.app | Live (200) — serves the **old GSAP site**, not the Next.js rebuild |
 | Sign-Bridge | sign-bridge-chi.vercel.app | **Dead (404)** |
 
 Both dead URLs are still advertised in their repositories' `homepage` field, so GitHub shows a broken link on each repo page.
@@ -102,6 +105,7 @@ Discovery so far covered GitHub metadata, the live-URL checks, and a full local 
 
 ## 8. Needs Your Input
 
-- **The portfolio remote.** `portfolio-site` does not exist on GitHub. Create it and push the rebuild there, or re-point `origin` at the existing private `portfolio` repo and overwrite the old SCSS site?
-- **`IPL-data-Viz-`** is empty. Delete it, or rebuild the project it describes?
-- **The dead Vercel deployments.** Redeploying needs access to your Vercel account; I can make the repos deployment-ready but cannot deploy them.
+- **Point Vercel at the new repo.** `divyankkhewale.vercel.app` currently builds from the old GSAP site, not from `portfolio-site`. Switching the Vercel project's Git source (and setting `GITHUB_PAT` in its environment variables) is a dashboard action only you can take.
+- **Repo visibility.** `portfolio-site` was created **private**, matching the old `portfolio` repo. Say the word and I will flip it public.
+- **`IPL-data-Viz-` deletion is blocked.** The `gh` token lacks the `delete_repo` scope. Run `gh auth refresh -h github.com -s delete_repo` in an interactive terminal, then I can delete it.
+- **The other dead deployment.** `Sign-Bridge` still advertises a 404 demo. I can make the repo deployment-ready but cannot deploy it.
