@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, Loader2, Check } from "lucide-react";
+import { Mail, MapPin, Send, Github, Loader2, Check } from "lucide-react";
 import { useState } from "react";
 
 const EMAIL = "chinmaykhewale2005@gmail.com";
@@ -119,12 +119,6 @@ export default function Contact() {
                   <div className="flex gap-4">
                     <a href="https://github.com/DivyankLosse" target="_blank" rel="noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-colors">
                       <Github className="w-5 h-5" />
-                    </a>
-                    <a href="#" className="p-3 rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-colors">
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a href="#" className="p-3 rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-colors">
-                      <Twitter className="w-5 h-5" />
                     </a>
                   </div>
                 </div>

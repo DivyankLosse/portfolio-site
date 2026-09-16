@@ -80,7 +80,7 @@ export default function Hero() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             
-            <Link href="/resume.pdf" target="_blank" className="flex items-center gap-2 glass-panel px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:border-primary transition-all duration-300">
+            <Link href="/Divyank_Khewale_Resume.pdf" target="_blank" rel="noreferrer" download className="flex items-center gap-2 glass-panel px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:border-primary transition-all duration-300">
               <FileText className="w-4 h-4" />
               Resume
             </Link>

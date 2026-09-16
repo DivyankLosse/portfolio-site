@@ -9,10 +9,31 @@ type TimelineEntry = {
   description: string;
 };
 
-// Real entries pending. The previous contents of this array were placeholder
-// copy from the starter template (invented employers and metrics) and were
-// removed rather than shipped. See README before re-populating.
-const timelineData: TimelineEntry[] = [];
+// Sourced from the CV in public/Divyank_Khewale_Resume.pdf. Keep the two in
+// step: anything added here must be backed by the CV.
+const timelineData: TimelineEntry[] = [
+  {
+    role: "AI Engineer Intern",
+    company: "iGurus, Pune",
+    duration: "Jun 2026 - Present",
+    description:
+      "Building computer vision and LLM systems: an AI posture report generator that analyses patient posture into health reports, a real-time posture monitor with desktop alerts, an LLM-generated long-form astrology report platform, and a yoga pose correction system with live corrective feedback.",
+  },
+  {
+    role: "B.Tech, Computer Science & Engineering",
+    company: "GH Raisoni University, Amravati",
+    duration: "2023 - 2027",
+    description:
+      "Undergraduate study in computer science, alongside independent work across generative AI, computer vision, LLM agents, NLP and IoT.",
+  },
+  {
+    role: "Data Science and Machine Learning",
+    company: "Binary Brains, Nagpur",
+    duration: "Mar 2025 - Aug 2025",
+    description:
+      "Certification training in data science and machine learning, following an earlier Python and data analytics programme at the same institute (Sep 2024 - Feb 2025).",
+  },
+];
 
 export default function Experience() {
   return (

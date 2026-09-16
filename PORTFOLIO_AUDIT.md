@@ -106,6 +106,5 @@ Discovery so far covered GitHub metadata, the live-URL checks, and a full local 
 ## 8. Needs Your Input
 
 - **Point Vercel at the new repo.** `divyankkhewale.vercel.app` currently builds from the old GSAP site, not from `portfolio-site`. Switching the Vercel project's Git source (and setting `GITHUB_PAT` in its environment variables) is a dashboard action only you can take.
-- **Repo visibility.** `portfolio-site` was created **private**, matching the old `portfolio` repo. Say the word and I will flip it public.
 - **`IPL-data-Viz-` deletion is blocked.** The `gh` token lacks the `delete_repo` scope. Run `gh auth refresh -h github.com -s delete_repo` in an interactive terminal, then I can delete it.
 - **The other dead deployment.** `Sign-Bridge` still advertises a 404 demo. I can make the repo deployment-ready but cannot deploy it.
