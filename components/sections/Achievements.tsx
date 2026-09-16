@@ -4,14 +4,15 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
-const stats = [
-  { label: "Projects Built", value: 15, suffix: "+" },
-  { label: "Technologies Mastered", value: 20, suffix: "+" },
-  { label: "GitHub Contributions", value: 500, suffix: "+" },
-  { label: "Cups of Coffee", value: 1000, suffix: "+" },
-];
+type Stat = { label: string; value: number };
 
-function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
+type GithubStats = {
+  publicRepos: number | null;
+  languages: number | null;
+  contributions: number | null;
+};
+
+function AnimatedCounter({ value }: { value: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(0);
@@ -41,26 +42,59 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
   return (
     <span ref={ref} className="text-5xl font-bold font-mono text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">
-      {count}{suffix}
+      {count}
     </span>
   );
 }
 
 export default function Achievements() {
+  const [stats, setStats] = useState<Stat[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchStats() {
+      try {
+        const res = await fetch("/api/github/stats");
+        if (!res.ok) return;
+        const data: GithubStats = await res.json();
+        if (cancelled) return;
+
+        // Only render the numbers that actually came back.
+        setStats(
+          [
+            { label: "Public Repositories", value: data.publicRepos },
+            { label: "Languages Used", value: data.languages },
+            { label: "Contributions This Year", value: data.contributions },
+          ].filter((s): s is Stat => typeof s.value === "number")
+        );
+      } catch {
+        // Leave the section empty rather than showing a made-up figure.
+      }
+    }
+
+    fetchStats();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!stats?.length) return null;
+
   return (
     <section className="py-24 border-y border-border/50 relative overflow-hidden bg-background">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 text-center">
           {stats.map((stat, index) => (
             <motion.div
-              key={index}
+              key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="flex flex-col items-center justify-center space-y-2 p-6 rounded-2xl glass-panel hover:glass-panel-hover"
             >
-              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              <AnimatedCounter value={stat.value} />
               <span className="text-sm tracking-wider uppercase text-muted-foreground font-semibold mt-2">{stat.label}</span>
             </motion.div>
           ))}

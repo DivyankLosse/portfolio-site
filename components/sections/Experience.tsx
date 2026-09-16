@@ -2,26 +2,17 @@
 
 import { motion } from "framer-motion";
 
-const timelineData = [
-  {
-    role: "AI Engineer",
-    company: "FutureTech Innovations",
-    duration: "2024 - Present",
-    description: "Spearheading the development of reinforcement learning agents for dynamic resource allocation. Architecting scalable microservices for ML inference.",
-  },
-  {
-    role: "Machine Learning Researcher",
-    company: "University AI Lab",
-    duration: "2022 - 2024",
-    description: "Conducted research on computer vision models for real-time anomaly detection. Published findings in top-tier conferences.",
-  },
-  {
-    role: "Full Stack Developer",
-    company: "Startup Nexus",
-    duration: "2021 - 2022",
-    description: "Built and maintained the core web application serving 100k+ MAU using React, Node.js, and PostgreSQL.",
-  }
-];
+type TimelineEntry = {
+  role: string;
+  company: string;
+  duration: string;
+  description: string;
+};
+
+// Real entries pending. The previous contents of this array were placeholder
+// copy from the starter template (invented employers and metrics) and were
+// removed rather than shipped. See README before re-populating.
+const timelineData: TimelineEntry[] = [];
 
 export default function Experience() {
   return (
@@ -49,7 +40,15 @@ export default function Experience() {
 
         <div className="max-w-3xl mx-auto relative">
           {/* Vertical Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-border -translate-x-1/2" />
+          {timelineData.length > 0 && (
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-border -translate-x-1/2" />
+          )}
+
+          {timelineData.length === 0 && (
+            <p className="pl-16 md:pl-0 md:text-center text-muted-foreground">
+              Timeline coming soon.
+            </p>
+          )}
 
           <div className="space-y-12">
             {timelineData.map((item, idx) => {

@@ -36,11 +36,12 @@ export async function GET() {
     return NextResponse.json(formattedData);
   } catch (error) {
     console.error("GitHub API error:", error);
-    // Fallback data
+    // Fallback data. Only used when the API call fails (no token, expired
+    // token, or rate limit). Languages here must match the real repositories.
     return NextResponse.json([
       { name: "SSS-Startup-Survival-Simulator", stars: 0, forks: 0, language: "Python", url: "https://github.com/DivyankLosse/SSS-Startup-Survival-Simulator" },
-      { name: "AgriLO", stars: 0, forks: 0, language: "Python", url: "https://github.com/DivyankLosse/AgriLO" },
-      { name: "Sign-Bridge", stars: 0, forks: 0, language: "Python", url: "https://github.com/DivyankLosse/Sign-Bridge" },
+      { name: "AgriLO", stars: 0, forks: 0, language: "JavaScript", url: "https://github.com/DivyankLosse/AgriLO" },
+      { name: "Sign-Bridge", stars: 0, forks: 0, language: "JavaScript", url: "https://github.com/DivyankLosse/Sign-Bridge" },
     ], { status: 200 }); // Return 200 with fallback data
   }
 }
